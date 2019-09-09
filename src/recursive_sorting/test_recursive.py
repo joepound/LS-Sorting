@@ -1,10 +1,11 @@
 import unittest
 import random
-from recursive_sorting import *
 
 
 class RecursiveSortingTests(unittest.TestCase):
     def test_merge_sort(self):
+        from recursive_sorting import merge_sort
+
         arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
         arr2 = []
         arr3 = [2]
