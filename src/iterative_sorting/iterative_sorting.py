@@ -6,8 +6,16 @@ def selection_sort(arr):
         smallest_index = cur_index
 
         # TO-DO: find next smallest element
+        for j in range(cur_index, len(arr)):
+            moving_index = j
+            if arr[smallest_index] > arr[moving_index]:
+                smallest_index = moving_index
 
         # TO-DO: swap
+        if smallest_index != cur_index:
+            arr[cur_index], arr[smallest_index] = (
+                arr[smallest_index], arr[cur_index]
+            )
 
     return arr
 
