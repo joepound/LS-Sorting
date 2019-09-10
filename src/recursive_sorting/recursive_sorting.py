@@ -64,7 +64,20 @@ def merge_sort_in_place(arr, l, r):
 # STRETCH: implement the timsort function below
 def timsort(arr):
     # TO-DO
-
+    import sys
+    sys.path.append("../iterative_sorting")
+    # pylint: disable=import-error
+    from iterative_sorting import insertion_sort
+    RUN = 32
+    for i in range(0, len(arr), RUN):
+        insertion_sort(arr, i, min(i + RUN, len(arr)))
+    merge_size = RUN
+    while merge_size < len(arr):
+        for start in range(0, len(arr), merge_size * 2):
+            mid = start + merge_size
+            end = min(start + (merge_size * 2), len(arr))
+            merge_in_place(arr, start, mid, end)
+        merge_size *= 2
     return arr
 
 
