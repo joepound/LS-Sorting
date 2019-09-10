@@ -50,3 +50,25 @@ def count_sort(arr, maximum=-1):
     for i in range(len(value_counts)):
         arr += [i] * value_counts[i]
     return arr
+
+# ADDITIONAL: Insertion sort algorithm
+
+
+def insertion_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    for i in range(1, len(arr)):
+        print(arr)
+        temp = arr[i]
+        track = None
+        for j in range(i - 1, -1, -1):
+            track = j
+            if temp < arr[j]:
+                arr[j + 1] = arr[j]
+            else:
+                arr[j + 1] = temp
+                track = None
+                break
+        if track is not None:
+            arr[track] = temp
+    return arr
