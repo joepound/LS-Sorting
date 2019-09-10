@@ -55,10 +55,16 @@ class IterativeSortingTest(unittest.TestCase):
         arr3 = [0, 1, 2, 3, 4, 5]
         arr4 = random.sample(range(200), 50)
 
-        self.assertEqual(insertion_sort(arr1), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        self.assertEqual(insertion_sort(arr2), [])
-        self.assertEqual(insertion_sort(arr3), [0, 1, 2, 3, 4, 5])
-        self.assertEqual(insertion_sort(arr4), sorted(arr4))
+        self.assertEqual(
+            insertion_sort(arr1, 0, len(arr1)),
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        )
+        self.assertEqual(insertion_sort(arr2, 0, len(arr2)), [])
+        self.assertEqual(
+            insertion_sort(arr3, 0, len(arr3)),
+            [0, 1, 2, 3, 4, 5]
+        )
+        self.assertEqual(insertion_sort(arr4, 0, len(arr4)), sorted(arr4))
 
 
 if __name__ == '__main__':

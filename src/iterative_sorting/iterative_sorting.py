@@ -53,10 +53,10 @@ def count_sort(arr, maximum=-1):
 
 
 # ADDITIONAL: Insertion sort algorithm
-def insertion_sort(arr):
-    if len(arr) <= 1:
+def insertion_sort(arr, start, end):
+    if end <= 1:
         return arr
-    for i in range(1, len(arr)):
+    for i in range(start, end):
         temp = arr[i]
         track = None
         for j in range(i - 1, -1, -1):
