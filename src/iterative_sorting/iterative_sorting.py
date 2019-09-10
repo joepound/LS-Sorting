@@ -51,9 +51,8 @@ def count_sort(arr, maximum=-1):
         arr += [i] * value_counts[i]
     return arr
 
+
 # ADDITIONAL: Insertion sort algorithm
-
-
 def insertion_sort(arr):
     if len(arr) <= 1:
         return arr

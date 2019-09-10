@@ -66,3 +66,24 @@ def timsort(arr):
     # TO-DO
 
     return arr
+
+
+# ADDITIONAL: Quick sort algorithm
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = [arr[0]]
+    left = []
+    right = []
+    for i in range(1, len(arr)):
+        if arr[i] < pivot[0]:
+            left.append(arr[i])
+        elif arr[i] > pivot[0]:
+            right.append(arr[i])
+        else:
+            pivot.append(arr[i])
+    if len(left) == 0:
+        return pivot + quick_sort(right)
+    if len(right) == 0:
+        return quick_sort(left) + pivot
+    return quick_sort(left) + pivot + quick_sort(right)
