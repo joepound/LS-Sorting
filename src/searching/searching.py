@@ -1,49 +1,39 @@
 # STRETCH: implement Linear Search
-def linear_search(arr, target):
-
-    # TO-DO: add missing code
-    for i in range(len(arr)):
+def linear_search(arr, target, start=0, end=None):
+    if end is None:
+        end = len(arr)
+    for i in range(start, end):
         if arr[i] == target:
             return i
-
-    return -1   # not found
+    return -1
 
 
 # STRETCH: write an iterative implementation of Binary Search
-def binary_search(arr, target):
-    if len(arr) == 0:
-        return -1  # array empty
-
-    low = 0
-    high = len(arr) - 1
-
-    # TO-DO: add missing code
-    while low <= high:
-        mid = (low + high) // 2
-        if target == arr[mid]:
-            return mid
-        elif target < arr[mid]:
-            high = mid - 1
+def binary_search(arr, target, lowest_index=0, highest_index=None):
+    if highest_index is None:
+        highest_index = len(arr) - 1
+    while lowest_index <= highest_index:
+        mid_index = (lowest_index + highest_index) // 2
+        if target > arr[mid_index]:
+            lowest_index = mid_index + 1
+        elif target < arr[mid_index]:
+            highest_index = mid_index - 1
         else:
-            low = mid + 1
-
-    return -1  # not found
+            return mid_index
+    return -1
 
 
 # STRETCH: write a recursive implementation of Binary Search
-def binary_search_recursive(arr, target, low, high):
-    mid = (low + high) // 2
-
-    if len(arr) == 0:
-        return -1  # array empty
-
-    # TO-DO: add missing if/else statements, recursive calls
-    if target == arr[mid]:
-        return mid
-    if target < arr[mid]:
-        return binary_search_recursive(
-            arr, target, low, mid - 1
-        ) if low <= mid - 1 else -1
-    return binary_search_recursive(
-        arr, target, mid + 1, high
-    ) if mid + 1 <= high else -1
+def binary_search_recursive(arr, target, lowest_index=0, highest_index=None):
+    if highest_index is None:
+        highest_index = len(arr) - 1
+    mid_index = (lowest_index + highest_index) // 2
+    if lowest_index > highest_index:
+        return -1
+    if target == arr[mid_index]:
+        return mid_index
+    if target < arr[mid_index]:
+        highest_index = mid_index - 1
+    if target > arr[mid_index]:
+        lowest_index = mid_index + 1
+    return binary_search_recursive(arr, target, lowest_index, highest_index)
