@@ -1,76 +1,59 @@
 import unittest
-import random
+from random import sample
+from copy import deepcopy
 
 
 class RecursiveSortingTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(self):
+        self.UNSORTED_TEST_LISTS = (
+            [1, 5, 8, 4, 2, 9, 6, 0, 3, 7],
+            [],
+            [9000],
+            [1, 5, 8, 8, 4, 2, 9, 2, 6, 0, 3, 7],
+            sample(range(1000), 250)
+        )
+        self.SORTED_TEST_LISTS = tuple(
+            sorted(LIST) for LIST in self.UNSORTED_TEST_LISTS
+        )
+
     def test_merge_sort(self):
         from recursive_sorting import merge_sort
 
-        arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
-        arr2 = []
-        arr3 = [2]
-        arr4 = [0, 1, 2, 3, 4, 5]
-        arr5 = random.sample(range(200), 50)
-
-        self.assertEqual(merge_sort(arr1), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        self.assertEqual(merge_sort(arr2), [])
-        self.assertEqual(merge_sort(arr3), [2])
-        self.assertEqual(merge_sort(arr4), [0, 1, 2, 3, 4, 5])
-        self.assertEqual(merge_sort(arr5), sorted(arr5))
+        test_lists = deepcopy(self.UNSORTED_TEST_LISTS)
+        for i in range(len(test_lists)):
+            self.assertEqual(
+                merge_sort(test_lists[i]),
+                self.SORTED_TEST_LISTS[i]
+            )
 
     # Uncomment this test to test your in-place merge sort implementation
 
     def test_in_place_merge_sort(self):
         from recursive_sorting import merge_sort_in_place
 
-        arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
-        arr2 = []
-        arr3 = [2]
-        arr4 = [0, 1, 2, 3, 4, 5]
-        arr5 = random.sample(range(200), 50)
+        test_lists = deepcopy(self.UNSORTED_TEST_LISTS)
+        for i in range(len(test_lists)):
+            merge_sort_in_place(test_lists[i], 0, len(test_lists[i]) - 1)
+            self.assertEqual(test_lists[i], self.SORTED_TEST_LISTS[i])
 
-        self.assertEqual(
-            merge_sort_in_place(arr1, 0, len(arr1)-1),
-            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        )
-        self.assertEqual(merge_sort_in_place(arr2, 0, len(arr2)-1), [])
-        self.assertEqual(merge_sort_in_place(arr3, 0, len(arr3)-1), [2])
-        self.assertEqual(
-            merge_sort_in_place(arr4, 0, len(arr4)-1),
-            [0, 1, 2, 3, 4, 5]
-        )
-        self.assertEqual(merge_sort_in_place(
-            arr5, 0, len(arr5)-1), sorted(arr5))
-
-    def test_tim_sort(self):
+    def test_timsort(self):
         from recursive_sorting import timsort
 
-        arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7, 3]
-        arr2 = []
-        arr3 = [2]
-        arr4 = [0, 1, 2, 3, 4, 5]
-        arr5 = random.sample(range(1000), 500)
-
-        self.assertEqual(timsort(arr1), [0, 1, 2, 3, 3, 4, 5, 6, 7, 8, 9])
-        self.assertEqual(timsort(arr2), [])
-        self.assertEqual(timsort(arr3), [2])
-        self.assertEqual(timsort(arr4), [0, 1, 2, 3, 4, 5])
-        self.assertEqual(timsort(arr5), sorted(arr5))
+        test_lists = deepcopy(self.UNSORTED_TEST_LISTS)
+        for i in range(len(test_lists)):
+            timsort(test_lists[i])
+            self.assertEqual(test_lists[i], self.SORTED_TEST_LISTS[i])
 
     def test_quick_sort(self):
         from recursive_sorting import quick_sort
 
-        arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7, 3]
-        arr2 = []
-        arr3 = [2]
-        arr4 = [0, 1, 2, 3, 4, 5]
-        arr5 = random.sample(range(200), 50)
-
-        self.assertEqual(quick_sort(arr1), [0, 1, 2, 3, 3, 4, 5, 6, 7, 8, 9])
-        self.assertEqual(quick_sort(arr2), [])
-        self.assertEqual(quick_sort(arr3), [2])
-        self.assertEqual(quick_sort(arr4), [0, 1, 2, 3, 4, 5])
-        self.assertEqual(quick_sort(arr5), sorted(arr5))
+        test_lists = deepcopy(self.UNSORTED_TEST_LISTS)
+        for i in range(len(test_lists)):
+            self.assertEqual(
+                quick_sort(test_lists[i]),
+                self.SORTED_TEST_LISTS[i]
+            )
 
 
 if __name__ == '__main__':

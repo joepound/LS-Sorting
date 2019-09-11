@@ -44,7 +44,7 @@ def insertion_sort(arr, start=0, end=None):
         end = len(arr)
     for moving_index in range(start, end):
         val_to_insert = arr[moving_index]
-        for insertion_index in range(moving_index - 1, start - 1, -1):
+        for insertion_index in range(moving_index - 1, -1, -1):
             if val_to_insert < arr[insertion_index]:
                 arr[insertion_index + 1] = arr[insertion_index]
                 if insertion_index == 0:
